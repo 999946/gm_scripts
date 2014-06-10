@@ -9,15 +9,17 @@
 // @version     1
 // @run-at 		document-end
 // @grant 		GM_xmlhttpRequest
+// @grant		GM_registerMenuCommand
 // ==/UserScript==
-//2014/05/29  兼容新版百度首页
+//2014/05/29  	兼容新版百度首页
+//2014/06/10 	添加一个初始化命令
 if(!document.documentElement.hasAttribute('xmlns'))return false;
 var _bing = {
 		name : '_baiduLogo',
 		X : 0,
 		Y : 0,
-		current:{idx:0,url:'',type:'image1'},
-		formerly:{idx:0,url:'',type:'image'},
+		current:{idx:0,url:''},
+		formerly:{idx:0,url:''},
 		idx:0
 	};
 var loading = false;
@@ -89,7 +91,7 @@ function changeBg(imageUrl,video){
 	})
 	bg.src = imageUrl;
 	_bing.formerly = _bing.current;
-	_bing.current = {idx:_bing.idx,url:imageUrl,type:'image'};
+	_bing.current = {idx:_bing.idx,url:imageUrl};
 	save(_bing);
 }
 
@@ -187,3 +189,15 @@ try{
 }catch(ee){
 	console.log(ee)
 }
+function initBing () {
+	var _init_bing = {
+		name : '_baiduLogo',
+		X : 0,
+		Y : 0,
+		current:{idx:0,url:''},
+		formerly:{idx:0,url:''},
+		idx:0
+	};
+	save(_init_bing);
+}
+GM_registerMenuCommand("Bing图初始化",initBing);
