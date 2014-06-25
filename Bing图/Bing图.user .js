@@ -41,7 +41,7 @@ function loadResponse(e){
 		var d = JSON.parse(e.responseText);
 		var image = d.images[0];
 		var imageUrl = image.url.replace(new RegExp('^(\w{3,5}:\/\/[^/]*)'), bing_uri);
-		//"/" == imageUrl[0] ? imageUrl=bing_uri+imageUrl : null;
+		"/" == imageUrl[0] ? imageUrl=bing_uri+imageUrl : null;
 		var	video = image.vid ? image.vid : null;
 		console.log(image.copyrightlink)
 		$('#sh_cp').attr('href',image.copyrightlink.replace(new RegExp('.*\\?q=([^&]*).*', 'i'), 's?wd=$1')).attr('title',image.copyright);
