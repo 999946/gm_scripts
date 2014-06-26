@@ -19,7 +19,8 @@ var _bing = {
 		Y : 0,
 		current:{idx:0,url:''},
 		formerly:{idx:0,url:''},
-		idx:0
+		idx:0,
+		defultOpacity:40
 	};
 var loading = false;
 
@@ -176,7 +177,9 @@ function bing(){
 	if($("#bg2").css("background-image")!='none'){
 		$(".s-skin-container")&&$(".s-skin-container").remove();
 	}
-	
+	if(!$('#content').hasClass('s-skin-user')){
+		$('#content').addClass('s-skin-user s-skin-hasbg s-skin-dark opacity-40 white-logo s-opacity-'+_bing.defultOpacity);
+	}
 	$('body').append('<div id="hp_bottomCell"><div id="hp_pgm"><h3></h3><a  target="_blank"></a></div><div id="sh_rdiv"><a id="sh_igl" href="javascript:void(0)" title="上一页"/><a id="sh_igr" href="javascript:void(0)" title="下一页"/><a id="sh_cp" href="javascript:void(0)" target="_blank"/><a id="sh_igd" href="javascript:void(0)" title="下载壁纸"/></div></div>');
 	$('.btn_wr').click(function(){
 		$('#form1').submit();
@@ -214,7 +217,8 @@ function initBing () {
 		Y : 0,
 		current:{idx:0,url:''},
 		formerly:{idx:0,url:''},
-		idx:0
+		idx:0,
+		defultOpacity:40
 	};
 	save(_init_bing);
 	_window.location.href=_window.location.href;
