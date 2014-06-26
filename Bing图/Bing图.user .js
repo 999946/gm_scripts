@@ -155,9 +155,9 @@ function bing(){
     	#su1{display: none !important;}\
     	span.btn_wr {float: right;left: -1px;position: relative;top: -30px;width: 28px !important;height:28px!important;}\
     	#nv a, #tb_mr b { text-decoration: none!important;font-size: 13px!important;}\
-    	#nv{position: absolute;left:-75px;top:6px;width: 550px !important;}\
-    	.s-notify-pnl .s-pk-mod,.s-new-weather-pnl{left:450px!important;}\
-	.s-mod-weather{left:450px!important;top: 5px;}/*新版本首页*/\
+    	#nv{position: absolute;left:-65px;top:6px;width: 550px !important;}\
+    	.s-notify-pnl .s-pk-mod,.s-new-weather-pnl{left:455px!important;}\
+	.s-mod-weather{left:470px!important;top: 8px;}/*新版本首页*/\
     	#bottom_container{display: none !important;height:0px!important;}\
     	#s_wrap{margin: 120px auto auto!important; padding-bottom: 0px!important;}\
 	a#sh_igl{background-position:-192px -53px}\
