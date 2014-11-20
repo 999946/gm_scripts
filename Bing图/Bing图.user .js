@@ -6,7 +6,7 @@
 // @include 	http://www.baidu.com/home*
 // @include 	http://www.baidu.com/?tn=*
 // @include 	http://www.baidu.com/index.php*
-// @version     1
+// @version     1.2
 // @run-at 	document-end
 // @require http://code.jquery.com/jquery-latest.min.js
 // @grant 	GM_xmlhttpRequest
@@ -132,10 +132,10 @@ function loadBgJson(i/*1-7 | 0为当天 -1为明天*/,callback){
 	}
 }
 function changHasBgStyle(){
-	if(($('#content').attr('class')).indexOf('opacity')==-1)$("#content").addClass("s-skin-user s-skin-hasbg s-skin-dark opacity-40 white-logo");
+	if(($('#head').attr('class')).indexOf('opacity')==-1)$("#head").addClass("s-skin-user s-skin-hasbg s-skin-dark opacity-40 white-logo");
 	//新版本
-	if(!$('#content').hasClass('s-skin-user')){
-		$('#content').addClass('s-skin-user s-skin-hasbg s-skin-dark opacity-40 white-logo s-opacity-'+_bing.defultOpacity);
+	if(!$('#head').hasClass('s-skin-user')){
+		$('#head').addClass('s-skin-user s-skin-hasbg s-skin-dark opacity-40 white-logo s-opacity-'+_bing.defultOpacity);
 	}
 }
 
@@ -153,20 +153,21 @@ function bing(){
 	p#lg{position:absolute;top:10%;left:8%;width:175px;height: 45px !important;padding: 0px!important;margin: 0px!important;background-position: 0 0px;}\
 	#lg img{display: none !important;}\
 	#lg{/*-moz-transition:all 1s ease;-webkit-transition:all 1s ease;*/background:url("http://imgsrc.baidu.com/forum/w%3D580/sign=108ffbc58644ebf86d716437e9fbd736/9fc170d12f2eb938e0bfb834d4628535e7dd6fc9.jpg") no-repeat;}\
-    	.s-skin-hasbg #kw1{background:none !important;width:423px !important;box-shadow: none !important;height: 26px!important;line-height: 26px!important;padding: 4px 9px 4px 7px!important;}\
-    	#form1 .bdsug{width:421px!important;}#form1 .bdsug li{width:404px!important;}\
-	#form1 .bdsug{border-left:0px!important;border-right:0px!important;top:32px!important;}\
+	.s-skin-hasbg #kw{background:none !important;width:423px !important;box-shadow: none !important;height: 26px!important;line-height: 26px!important;padding: 4px 9px 4px 7px!important;}\
+	#form .bdsug{width:421px!important;}#form .bdsug li{width:404px!important;}\
+	#form .bdsug{border-left:0px!important;border-right:0px!important;top:32px!important;}\
 	div#s_fm {left: 8%;margin: 0 0 0 155px;padding: 0;position: absolute;top: 10%;width: 421px;height:45px!important;}\
-    	#form1{background-color: #FFFFFF;margin-top: 5px!important;}\
+	#form{background-color: #FFFFFF;margin-top: 5px!important;}\
 	.btn_wr {background: url("http://imgsrc.baidu.com/forum/pic/item/7da86b899e510fb3f9270773d833c895d0430cf9.jpg") no-repeat scroll -149px -37px rgba(0, 0, 0, 0) !important;}\
-    	#su1{display: none !important;}\
-    	span.btn_wr {float: right;left: -1px;position: relative;top: -30px;width: 28px !important;height:28px!important;}\
-    	#nv a, #tb_mr b { text-decoration: none!important;font-size: 13px!important;}\
-    	#nv{position: absolute;left:-65px;top:6px;width: 550px !important;}\
-    	.s-notify-pnl .s-pk-mod,.s-new-weather-pnl{left:455px!important;}\
-	.s-mod-weather{left:470px!important;top: 8px;}/*新版本首页*/\
-    	#bottom_container{display: none !important;height:0px!important;}\
-    	#s_wrap{margin: 120px auto auto!important; padding-bottom: 0px!important;}\
+	#su{display: none !important;}\
+	span.btn_wr {float: right;left: -1px;position: relative;top: -30px;width: 28px !important;height:28px!important;}\
+	#nv a,#nv b{margin-left: 10px!important;}\
+	#nv a, #tb_mr b { text-decoration: none!important;font-size: 13px!important;}\
+	#nv{position: absolute;left:-30px;top:0px;width: 480px !important;}\
+	.s-notify-pnl .s-pk-mod,.s-new-weather-pnl{left:450px!important;}\
+	.s-mod-weather{left:450px!important;top: 6px;}/*新版本首页*/\
+	#bottom_container{display: none !important;height:0px!important;}\
+	#s_wrap{margin: 120px auto auto!important; padding-bottom: 0px!important;}\
 	a#sh_igl{background-position:-192px -53px}\
 	a#sh_igr{background-position: -160px -53px}\
 	a#sh_cp{background-position: -64px -85px}\
@@ -178,8 +179,8 @@ function bing(){
 	#hp_pgm h3{text-align:left;color: rgb(255, 255, 255);font-size: 16px;font-weight: normal;margin: 0;padding: 0;}\
 	#hp_pgm a{float:left;text-align:left;color: rgb(255, 255, 255);font-size: 14px;font-weight: normal;margin-top: 5px;padding: 0;text-decoration:none;}'
 	;
-	$("body").before('<style type="text/css">'+css+'</style>');
-	$("#content").append('<div id="bg1" class="bing_bg" style="z-index:-5"/><div id="bg2" class="bing_bg" style="z-index:-5"/><div id="bg3" class="bing_bg" style="z-index:-4"><video autoplay="true" class="bing_video"/></div>');
+	$("body").before('<style id="bingtu" type="text/css">'+css+'</style>');
+	$("#head").append('<div id="bg1" class="bing_bg" style="z-index:-5"/><div id="bg2" class="bing_bg" style="z-index:-5"/><div id="bg3" class="bing_bg" style="z-index:-4"><video autoplay="true" class="bing_video"/></div>');
 	$("#bg2,#bg1").css("background-color",'rgba(89, 83, 87, 0.3)');
 	if($("#bg2").css("background-image")!='none'){
 		$(".s-skin-container")&&$(".s-skin-container").remove();
@@ -208,7 +209,7 @@ function bing(){
 }
 
 try{
-	if(document.documentElement.hasAttribute('xmlns')){
+	//if(document.documentElement.hasAttribute('xmlns')){
 		var bing_uri = 'http://cn.bing.com';
 		var _window = typeof unsafeWindow != 'undefined'?unsafeWindow:window;
 		//var $ = _window.$;
@@ -221,7 +222,7 @@ try{
 		}
 		loadBgJson(0,loadResponse);//_bing.idx
 		
-	}
+	//}
 }catch(ee){
 	console.log(ee)
 }
@@ -239,4 +240,3 @@ function initBing () {
 	_window.location.href=_window.location.href;
 }
 GM_registerMenuCommand("Bing图初始化",initBing);
-
