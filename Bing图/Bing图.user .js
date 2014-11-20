@@ -186,7 +186,7 @@ function bing(){
 	}
 	$('body').append('<div id="hp_bottomCell"><div id="hp_pgm"><h3></h3><a  target="_blank"></a></div><div id="sh_rdiv"><a id="sh_igl" href="javascript:void(0)" title="上一页"/><a id="sh_igr" href="javascript:void(0)" title="下一页"/><a id="sh_cp" href="javascript:void(0)" target="_blank"/><a id="sh_igd" href="javascript:void(0)" title="下载壁纸"/></div></div>');
 	(document.querySelector('.btn_wr')).addEventListener('click', function(event) {
-		 (document.querySelector('#form1')).submit();
+		 (document.querySelector('#form')).submit();
 	});
 	(document.getElementById('sh_rdiv')).addEventListener('click', function(event) {
 		switch (event.target.id) {
@@ -194,7 +194,17 @@ function bing(){
 			case 'sh_igr':nextImg();break;
 			case 'sh_igd':downloadImg();break;
 		}
-	})
+	});
+	function removeStyle(){
+	    $('#bingtu').empty();
+	    $('#hp_bottomCell').empty();
+	}
+	$("#form").submit(function(event){
+	  	removeStyle();
+	});
+	$("#kw").change(function(){
+		$(".bdsug-overflow").click(removeStyle)
+	});
 }
 
 try{
