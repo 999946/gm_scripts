@@ -1,18 +1,19 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name 		复选框圈选
 // @namespace 	linxiaolu
 // @include 	http://*
 // @include 	file://*
 // @include     file:///*
-// @version 	1
+// @version 	1.1
+// @description:zh-cn  CTRL(Mac 是Command键) + 鼠标左键批量选择 
 // @run-at 		document-end
 // @grant 		none
 // ==/UserScript==
 // http://bbs.blueidea.com/thread-2854610-1-1.html
 (function () {
 	var wrap = document.querySelector("#MultiSelectorWrap"),
-	mousewindow = document.querySelector("#mousewindow"),
-	nofocus = document.querySelector("#nofocus");
+	mousewindow = document.querySelector("#mousewindow");
+	// nofocus = document.querySelector("#nofocus");
 	if (!wrap) {
 		wrap = document.createElement("div");
 		wrap.id = "wrap";
@@ -21,13 +22,22 @@
 		mousewindow = document.createElement("div");
 		mousewindow.id = "mousewindow";
 		mousewindow.style.cssText = "position:absolute;font-size:0;border:1px dashed #ff6600;display:none;background:#ffffcc;opacity: 0.50;filter:alpha(opacity=50)";
-		nofocus = document.createElement("input");
-		nofocus.id = "nofocus";
-		nofocus.style.cssText = "border:0;width:0;height:0;font-size:0;background:none;overflow:hidden;";
-		mousewindow.appendChild(nofocus);
+		//nofocus = document.createElement("input");
+		// nofocus.id = "nofocus";
+		// nofocus.style.cssText = "border:0;width:0;height:0;font-size:0;background:none;overflow:hidden;";
+		//mousewindow.appendChild(nofocus);
 		document.body.appendChild(mousewindow);
 	}
-
+	var isMac = function() {
+        return /macintosh|mac os x/i.test(navigator.userAgent);
+	}();
+	var onKey = function(evt){
+		evt = evt || window.event;
+		//console.log(evt);
+		if ((isMac && evt.keyCode == 224) || (!isMac && evt.ctrlKey)) {
+			ctrlKey = !ctrlKey;
+		}
+	};
 	var x,
 	y,
 	ox,
@@ -39,14 +49,18 @@
 	cw,
 	ch,
 	xy = false,
-	chk;
+	chk,
+	ctrlKey = false;
+	document.onkeydown = onKey;
+	document.onkeyup = onKey;
 	document.onmousedown = function (evt) {
 		evt = evt || window.event;
+		// console.log(evt);
 		// 0 	规定鼠标左键。
 		// 1 	规定鼠标中键。
 		// 2 	规定鼠标右键。
 		// altKey | shiftKey | ctrlKey
-		if (evt.button == 0 && evt.ctrlKey == true) {
+		if (evt.button == 0 && ctrlKey == true) {
 			ox = evt.pageX;
 			oy = evt.pageY;
 			osl = document.body.scrollLeft;
@@ -72,7 +86,7 @@
 	document.onmousemove = function (evt) {
 		evt = evt || window.event;
 		if (xy == true) {
-			nofocus.focus();
+			//nofocus.focus();
 
 			x = evt.pageX;
 			y = evt.pageY;
